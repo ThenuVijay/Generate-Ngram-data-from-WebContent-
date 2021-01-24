@@ -8,10 +8,11 @@ import urllib.request
 
 
 file = urllib.request.urlopen('https://ta.wikipedia.org/wiki/%E0%AE%A4%E0%AE%A9%E0%AE%BF%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AE%9F%E0%AF%8D%E0%AE%9F_%E0%AE%B5%E0%AE%BE%E0%AE%B4%E0%AF%8D%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AF%88')
-file = file.read()
+file1 = file.read()
+file.close()
 
 
-content = bs.BeautifulSoup(file, 'lxml')
+content = bs.BeautifulSoup(file1, 'lxml')
 paragraphs = content.find_all('p')
 text = ''
 
@@ -31,7 +32,7 @@ def writefile(num,Out):
         writer = csv.writer(file)
         for i in Out:
             writer.writerow(i)    
-
+    file.close()
 
 def Findgrams(file,num):
     d=SpecialCharacterRemoval(file)
@@ -42,4 +43,4 @@ def Findgrams(file,num):
     writefile(num,Max_Out)
     
 Findgrams(text,1)
-Findgrams(text,2)
+Findgrams(text,3)
